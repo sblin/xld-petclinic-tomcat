@@ -37,17 +37,19 @@
                             <scanPlaceholders>true</scanPlaceholders>
                         </jee.War>
                         <jee.War name="petclinic-backend" groupId="com.xebialabs.xldeploy.demos" artifactId="PetClinic-Backend"/>
-
-                        <jee.DataSourceSpec name="petclinicDataSource">
-                            <jndiName>jdbc/petds</jndiName>
-                        </jee.DataSourceSpec>
-
-                        <!-- <app.Logger name="logger" location="logger"/> -->
+                        <tomcat.DataSourceSpec name="petclinicDataSource">
+                            <context>petclinic</context>
+                            <jndiName>mysql.jndi_name</jndiName>
+                            <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                            <url>{{mysql.url}}</url>
+                            <username>{{mysql.username}}</username>
+                            <password>{{mysql.password}}</password>
+                        </tomcat.DataSourceSpec>
                         <sql.SqlScripts name="sql" location="sql"/>
-                        <!-- <smoketest.HttpRequestTest name="testPage">
-                            <url>{{smoke.test.url}}</url>
-                            <expectedResponseText>{{TITLE}}</expectedResponseText>
-                        </smoketest.HttpRequestTest> -->
+                        <smoketest.HttpRequestTest name="smokeTest">
+                            <url>{{smoketest.url}}</url>
+                            <expectedResponseText>{{smoketest.expectedResponse}}</expectedResponseText>
+                        </smoketest.HttpRequestTest>
                     </deployables>
                     <environmentId>Environments/Dev/Tomcat-Dev</environmentId>
                     <username>admin</username>
